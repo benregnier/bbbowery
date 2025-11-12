@@ -1,8 +1,9 @@
 --- boids
 -- t gill 190925
 -- inspired by http://www.vergenet.net/~conrad/boids/pseudocode.html
--- in1: influence center
--- in2: influence acceleration
+-- When CVIns are patched then knobs become attenuators. TODO
+-- Knob X & CV In 1: influence center TODO
+-- Knob Y & CV IN 2: influence acceleration TODO
 -- out1-4: slewed voltage
 
 -- TODO refine ranges & apply 'expo' where appropriate
