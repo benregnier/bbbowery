@@ -15,8 +15,16 @@ d = s{2, 2, 2, 2, 2, 2} -- voice 2 timing
 
 function init()
   input[1].mode('clock')
-  bpm = clock.tempo  
-
+  bpm = clock.tempo 
+  bb.switch.change = function(position)
+    if position == 'down' then
+      stop_playing()
+    elseif position == 'middle' then
+      start_playing()
+      input[1].mode('clock')
+    else
+      input[1].mode('stream')
+ 
 end
 function start_playing()
   coro_1 = clock.run(notes_event)
@@ -31,18 +39,23 @@ function notes_event()
     clock.sync(b())
     output[1].volts = a()/12
     output[1].slew = .1
-    output[2].action = ar(1, 1, 5, 'lin')
-    output[2]()
+    output[3].action = ar(1, 1, 5, 'lin')
+    output[3]()
+    bb.pulseout[1](pulse())
+    if bb.switch.position == 'up' then
+      clock.tempo = (bb.knob.main * 200) + 1
   end
 end
 function other_event()
   while true do
     clock.sync(d())
-    output[3].volts = c()/12
-    output[3].slew = .1
+    output[2].volts = c()/12
+    output[2].slew = .1
     output[4].action = ar(1, 1, 5, 'lin')
     output[4]()
+    bb.pulseout[2](pulse())
   end
 end
 end
+
 
