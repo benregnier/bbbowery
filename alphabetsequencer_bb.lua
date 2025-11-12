@@ -1,12 +1,11 @@
 ---alphabet sequencer
---start playback for outputs 1-4 with start_playing() 
---or start eveything at once with start_everything() 
---stop playback on outputs 1-4 with stop_playing() 
---stop playback on just friends with stop_jf() 
---stop playback on w/syn with stop_with
---or stop everything at once with stop_everything()
---try updating the sequins!
+--start playback for outputs with start_playing() 
+--stop playback on outputs with stop_playing()
+--each channel is vertical - pitch on cv out, envelope on audio out, trigger on pulse out
+--when switch is up, tempo is set by main knob (1-201 bpm), middle has bpm set by cv in 1, down provides a momentary pause
+--try updating the sequins! add your own sequins to do other stuff!
 --see comments below for which sequins do what
+
 s = sequins
 a = s{4, 6, 4, s{6, 8, 1, 11}} -- voice 1 pitch
 b = s{2, 2, 2, 2, 2, 2} -- voice 1 timing
@@ -57,5 +56,6 @@ function other_event()
   end
 end
 end
+
 
 
