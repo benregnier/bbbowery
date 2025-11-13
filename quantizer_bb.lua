@@ -49,9 +49,9 @@ end
 
 function setScales()
   local count = #scales
-  output[1].scale(scales[tableIndex(bb.Knob.Main,count)])
-  output[2].scale(scales[tableIndex(bb.Knob.X,count)]) 
-  input[2].scale(scales[tableIndex(bb.Knob.Y,count)])  
+  output[1].scale(scales[tableIndex(bb.knob.main,count)])
+  output[2].scale(scales[tableIndex(bb.knob.x,count)]) 
+  input[2].scale(scales[tableIndex(bb.knob.y,count)])  
 end
   
 
