@@ -2,7 +2,7 @@
 --start playback for outputs with start_playing() 
 --stop playback on outputs with stop_playing()
 --each channel is vertical - pitch on cv out, envelope on audio out, trigger on pulse out
---when switch is up, tempo is set by main knob (1-201 bpm), middle has bpm set by cv in 1, down provides a momentary pause
+--tempo is set by main knob unless you've patched a clock to cv 1
 --try updating the sequins! add your own sequins to do other stuff!
 --see comments below for which sequins do what
 
@@ -15,24 +15,29 @@ d = s{2, 2, 2, 2, 2, 2} -- voice 2 timing
 function init()
   input[1].mode('clock')
   bpm = clock.tempo 
-  bb.switch.change = function(position)
-    if position == 'down' then
-      stop_playing()
-    elseif position == 'middle' then
-      start_playing()
-      input[1].mode('clock')
-    else
-      input[1].mode('stream')
- 
+  check_clock() 
 end
+
+function check_clock()
+  if bb.connected.cv1 then
+    input[1].mode('clock')
+  else
+    input[1].mode('stream')
+    clock.tempo = (bb.knob.main * 200) + 1
+  end
+end
+
 function start_playing()
+  check_clock()
   coro_1 = clock.run(notes_event)
   coro_2 = clock.run(other_event)
 end
+
 function stop_playing()
   clock.cancel(coro_1)
   clock.cancel(coro_2)
 end
+
 function notes_event()
   while true do
     clock.sync(b())
@@ -41,10 +46,10 @@ function notes_event()
     output[3].action = ar(1, 1, 5, 'lin')
     output[3]()
     bb.pulseout[1](pulse())
-    if bb.switch.position == 'up' then
-      clock.tempo = (bb.knob.main * 200) + 1
+    check_clock()      
   end
 end
+
 function other_event()
   while true do
     clock.sync(d())
@@ -55,7 +60,8 @@ function other_event()
     bb.pulseout[2](pulse())
   end
 end
-end
+
+
 
 
 
