@@ -13,17 +13,18 @@ c = s{4, 1, 6, 1, 6} -- voice 2 pitch
 d = s{2, 2, 2, 2, 2, 2} -- voice 2 timing
 
 function init()
-  input[1].mode('clock')
+  --input[1].mode('clock')
   bpm = clock.tempo 
-  check_clock() 
+  check_clock()
 end
 
-function check_clock()
-  if bb.connected.cv1 then
+function check_clock() --need to figure out how to turn off tempo
+  --if bb.connected.cv1 then
+  if bb.switch.position == 'up' then
     input[1].mode('clock')
   else
     input[1].mode('stream')
-    clock.tempo = (bb.knob.main * 200) + 1
+    clock.tempo = (bb.knob.main * 700) + 100
   end
 end
 
@@ -43,7 +44,7 @@ function notes_event()
     clock.sync(b())
     output[1].volts = a()/12
     output[1].slew = .1
-    output[3].action = ar(1, 1, 5, 'lin')
+    output[3].action = ar(0.01, 0.6, 5, 'lin')
     output[3]()
     bb.pulseout[1](pulse())
     check_clock()      
@@ -55,7 +56,7 @@ function other_event()
     clock.sync(d())
     output[2].volts = c()/12
     output[2].slew = .1
-    output[4].action = ar(1, 1, 5, 'lin')
+    output[4].action = ar(0.01, 0.5, 5, 'lin')
     output[4]()
     bb.pulseout[2](pulse())
   end
