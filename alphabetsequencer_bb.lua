@@ -8,9 +8,9 @@
 
 s = sequins
 a = s{4, 6, 4, s{6, 8, 1, 11}} -- voice 1 pitch
-b = s{2, 2, 2, 2, 2, 2} -- voice 1 timing
+b = s{2, 1, 3, 1, 1, 2} -- voice 1 timing
 c = s{4, 1, 6, 1, 6} -- voice 2 pitch
-d = s{2, 2, 2, 2, 2, 2} -- voice 2 timing
+d = s{2, 3, 2, 3, 2, 1} -- voice 2 timing
 
 function init()
   input[1].mode('clock')
@@ -22,7 +22,7 @@ function check_clock()
   if bb.connected.cv1 then
     input[1].mode('clock')
   else
-    input[1].mode('stream')
+    input[1].mode('none')
     clock.tempo = (bb.knob.main * 200) + 1
   end
 end
@@ -60,6 +60,7 @@ function other_event()
     bb.pulseout[2](pulse())
   end
 end
+
 
 
 
