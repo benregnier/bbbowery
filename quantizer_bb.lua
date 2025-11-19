@@ -6,8 +6,10 @@
 -- cv in 2: voltage to quantize
 -- cv out 1: in2 quantized to scale1 on clock pulses, 
 -- cv out 2: in2 quantized to scale2 on clock pulses
--- audio out 1: in2 quantized to scale3 continuously
--- audio out 2: trigger pulses when out3 changes
+-- audio out 1: linear envelope at clock pulses
+-- audio out 2: log envelope at clock pulses
+-- knobs x and y select scale
+-- main knob is envelope decay
 
 -- add your scales here!
 scales =
@@ -38,8 +40,8 @@ input[1].change = function(state)
   output[1].volts = input[2].volts
   output[2].volts = input[2].volts
   setScales()
-  output[3](ar(0.01,bb.knob.x,5'log'))
-  output[4](ar(0.01,bb.knob.y,5'log'))
+  output[3](ar(0.01,bb.knob.main,5,'lin'))
+  output[4](ar(0.01,bb.knob.main,5,'log'))
 end
 
 -- update continuous quantizer (this is removed in favor of an additional envelope, here for reference)
@@ -65,9 +67,8 @@ function setScales()
   scale1_old = scale1
   scale2_old = scale2
   scale3_old = scale3
-  scale1 = tableIndex(bb.knob.main,count)
-  scale2 = tableIndex(bb.knob.x,count)
-  scale3 = tableIndex(bb.knob.y,count)
+  scale1 = tableIndex(bb.knob.x,count)
+  scale2 = tableIndex(bb.knob.y,count)
   output[1].scale(scales[scale1])
   if scale1_old ~= scale1 then
     print("scale 1: "..names[scale1])
