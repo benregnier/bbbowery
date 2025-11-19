@@ -2,7 +2,8 @@
 --start playback for outputs with start_playing() 
 --stop playback on outputs with stop_playing()
 --each channel is vertical - pitch on cv out, envelope on audio out, trigger on pulse out
---tempo is set by main knob unless you've patched a clock to cv 1
+--tempo is set by main knob
+--decay on envelopes is set by knobs x and y
 --try updating the sequins! add your own sequins to do other stuff!
 --see comments below for which sequins do what
 
@@ -13,14 +14,12 @@ c = s{4, 1, 6, 1, 6} -- voice 2 pitch
 d = s{2, 2, 2, 2, 2, 2} -- voice 2 timing
 
 function init()
-  --input[1].mode('clock')
-  --bpm = clock.tempo 
-  clock.tempo = 80
+  --input[1].mode('clock') --this is how you would clock from input 1. this does not play well with knob control! 
   start_playing()
 end
 
 function check_clock()
-  --clock.tempo = (bb.knob.main * 200) + 40
+  clock.tempo = (bb.knob.main * 200) + 40
 end
 
 function start_playing()
@@ -39,7 +38,7 @@ function notes_event()
     clock.sync(b())
     output[1].volts = a()/12
     output[1].slew = .1
-    output[3].action = ar(0.01, 0.6, 5, 'lin')
+    output[3].action = ar(0.01, bb.knob.x, 5, 'lin') -- try 'log' shapes for snappier envelopes
     output[3]()
     bb.pulseout[1](pulse())
     check_clock()      
@@ -51,9 +50,10 @@ function other_event()
     clock.sync(d())
     output[2].volts = c()/12
     output[2].slew = .1
-    output[4].action = ar(0.01, 0.5, 5, 'lin')
+    output[4].action = ar(0.01, bb.knob.x, 5, 'lin')
     output[4]()
     bb.pulseout[2](pulse())
     check_clock()
   end
+
 end
