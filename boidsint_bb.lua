@@ -1,5 +1,6 @@
---- boids (integer / fixed-point version, no public)
--- converted to Q15-style integer math internally
+--- boids, the integer version
+-- this shows how to implement this function with a minimum of floating point math
+-- due to the nature of blackbird i'm not sure this actually provides performance improvements
 -- original by t gill 190925, adapted
 
 boids = {}
