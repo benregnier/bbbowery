@@ -38,14 +38,14 @@ input[1].change = function(state)
   output[1].volts = input[2].volts
   output[2].volts = input[2].volts
   setScales()
-  output[4](pulse(0.01))
+  output[3](ar(0.01,bb.knob.x,5'log'))
+  output[4](ar(0.01,bb.knob.y,5'log'))
 end
 
--- update continuous quantizer
-input[2].scale = function(sv)
-  output[3].volts = sv.volts
-  
-end
+-- update continuous quantizer (this is removed in favor of an additional envelope, here for reference)
+--input[2].scale = function(sv)
+  --output[3].volts = sv.volts
+--end
 
 function init()
   input[1].mode('change',1,0.1,'rising')
