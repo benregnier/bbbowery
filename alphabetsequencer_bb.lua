@@ -8,24 +8,19 @@
 
 s = sequins
 a = s{4, 6, 4, s{6, 8, 1, 11}} -- voice 1 pitch
-b = s{2, 1, 3, 1, 1, 2} -- voice 1 timing
+b = s{1, 1, 1, 1, 1, 1} -- voice 1 timing
 c = s{4, 1, 6, 1, 6} -- voice 2 pitch
-d = s{2, 3, 2, 3, 2, 1} -- voice 2 timing
+d = s{2, 2, 2, 2, 2, 2} -- voice 2 timing
 
 function init()
   --input[1].mode('clock')
-  bpm = clock.tempo 
-  check_clock()
+  --bpm = clock.tempo 
+  clock.tempo = 80
+  start_playing()
 end
 
-function check_clock() --need to figure out how to turn off tempo
-  --if bb.connected.cv1 then
-  if bb.switch.position == 'up' then
-    input[1].mode('clock')
-  else
-    input[1].mode('none')
-    clock.tempo = (bb.knob.main * 200) + 1
-  end
+function check_clock()
+  --clock.tempo = (bb.knob.main * 200) + 40
 end
 
 function start_playing()
@@ -59,11 +54,6 @@ function other_event()
     output[4].action = ar(0.01, 0.5, 5, 'lin')
     output[4]()
     bb.pulseout[2](pulse())
+    check_clock()
   end
 end
-
-
-
-
-
-
