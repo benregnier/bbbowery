@@ -35,7 +35,7 @@ function getdiv()
   else
     selector = bb.knob.main
   end
-  newdiv(tableindex(selector,windows#))  
+  newdiv(windows(tableindex(selector,windows#))) 
 
 function init()
   input[1].mode("clock", 1 / 4)
