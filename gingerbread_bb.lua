@@ -2,6 +2,7 @@
 -- input1: clock
 -- main knob: offset (-5 to 5)
 -- input2: add to offset, attenuate with y
+-- knob x : slew for outputs
 -- output1: X1
 -- output2: Y1
 -- output3: X2
@@ -37,6 +38,7 @@ input[1].change = function()
   end
   make_bread(gs[1], off, 0)
   make_bread(gs[2], 0, off)
+  for n = 1,4 do output[n].slew = bb.knob.x * 0.5 end
   for n=1,2 do
     output[n*2-1].volts = gs[n].x
     output[n*2].volts = gs[n].y

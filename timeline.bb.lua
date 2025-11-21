@@ -39,9 +39,6 @@ end
 
 function init()
   output[3].slew = 2
-  ii.jf.mode(1)
-  ii.jf.run_mode(1)
-
   clock.run(run_timeline) -- call instantly
 end
 
