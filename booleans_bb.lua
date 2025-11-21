@@ -9,6 +9,8 @@ public{f1 = '&' }:options(fenum):action(function() apply() end)
 public{f2 = '|' }:options(fenum):action(function() apply() end)
 public{f3 = '^' }:options(fenum):action(function() apply() end)
 public{f4 = '~^'}:options(fenum):action(function() apply() end)
+public{f5 = '>' }:options(fenum):action(function() apply() end)
+public{f6 = '<' }:options(fenum):action(function() apply() end)
 
 -- all the dynamic transfer fns between 2 inputs (ordering doesn't matter)
 fnlist =
@@ -26,12 +28,21 @@ fnlist =
 
 function q(n) return input[n].volts > 1.0 end
 function apply()
-    print'apply'
     local a, b = q(1), q(2)
     output[1].volts = fnlist[public.f1](a, b) and 5 or 0
     output[2].volts = fnlist[public.f2](a, b) and 5 or 0
     output[3].volts = fnlist[public.f3](a, b) and 5 or 0
     output[4].volts = fnlist[public.f4](a, b) and 5 or 0
+    if fnlist[public.f5](a, b) then
+        bb.pulseout[1]:high()
+    else
+        bb.pulseout[1]:low()
+    end
+    if fnlist[public.f6](a, b) then
+        bb.pulseout[2]:high()
+    else
+        bb.pulseout[2]:low()
+    end
 end
 
 function init()
