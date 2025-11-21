@@ -28,10 +28,10 @@ function make_bread(g, xoff, yoff)
 end
 
 input[1].change = function()
-  local off = 0
+  local off = 0.0
   local knoboff = (bb.knob.main * 10) - 5 -- -5 to 5 range
   if bb.connected.cv2 then
-    off = knoboff + (input[2] * bb.knob.y)
+    off = knoboff + (input[2].volts * bb.knob.y)
   else
     off = knoboff
   end
@@ -41,5 +41,4 @@ input[1].change = function()
     output[n*2-1].volts = gs[n].x
     output[n*2].volts = gs[n].y
   end
-  for n=1,4 do public.view.output[n]() end
 end
