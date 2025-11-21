@@ -7,9 +7,6 @@
 
 -- public params
 public{slew = 0.001}:xrange(0.001, 0.5):action(function(v) for n=1,4 do output[n].slew = v end end)
-public{ii_dest = 'none'}:options{'none','jf','wsyn'}
-    :action(function(e) if e=='jf' then ii.jf.mode(1) end end) -- enable synthesis mode
-public{ii_velo = 2}:range(0.1, 5)
 
 -- global state
 reg = {0,0,0,0,0,0}
@@ -17,12 +14,6 @@ reg = {0,0,0,0,0,0}
 function make_notes(r)
   for n=1,4 do
     output[n].volts = r[n]
-  end
-  if public.ii_dest ~= 'none' then
-    local count = (public.ii_dest == 'jf') and 6 or 4
-    for n=1,count do
-      ii[public.ii_dest].play_note(r[n], public.ii_velo)
-    end
   end
 end
 
