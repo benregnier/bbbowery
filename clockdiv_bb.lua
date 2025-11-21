@@ -1,6 +1,8 @@
 --- clock divider
 -- in1: clock input
--- in2: division selector (see divs)
+-- main knob: division selector
+-- in2: division selector (see divs) when patched
+-- when patched y becomes attenuator for in2
 -- out1-4: divided outputs
 
 function newdiv()
