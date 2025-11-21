@@ -13,6 +13,7 @@ function tableindex(v, c) -- given a value between 0 and 1 selects an item from 
 end
 
 function newdiv()
+  print("new div window selected: "..win_ix)
   for n = 1, 4 do
     output[n].clock_div = windows[win_ix].v[n] -- changed line
   end
