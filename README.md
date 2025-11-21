@@ -17,7 +17,7 @@ Blackbird has some limitations with relationship to crow (audio rate scripts wil
 - [quantizer_bb.lua](quantizer_bb.lua): a continuous and clocked quantizer demo
 - [samplehold_bb.lua](samplehold_bb.lua): sample and hold basics for scripting tutorial
 - [seqswitch_bb.lua](seqswitch_bb.lua): route an input to 1 of 4 outputs with optional 'hold'
-- [shiftregister_bb.lua](shiftregister_bb.lua) (*): output the last 4 captured voltages & play just friends
+- [shiftregister_bb.lua](shiftregister_bb.lua): output the last 4 captured voltages
 - [timeline.lua](timeline.lua): timeline sequencer
 
 learn how to upload scripts to blackbird using [***stage one*** of the crow scripting tutorial](https://monome.org/docs/crow/scripting)
