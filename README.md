@@ -12,12 +12,12 @@ Blackbird has some limitations with relationship to crow (audio rate scripts wil
 - [cvdelay_bb.lua](cvdelay_bb.lua): a control voltage delay with four taps & looping option
 - [euclidean.lua](euclidean.lua): a euclidean rhythm generator
 - [gingerbread_bb.lua](gingerbread_bb.lua): clocked chaos generators
-- [krahenlied.lua](krahenlied.lua): sequence synth voices with poetry
+- [krahenlied_bb.lua](krahenlied_bb.lua): sequence synth voices with poetry
 - [lorenz.lua](lorenz.lua): lorenz attractor chaotic lfos
 - [quantizer_bb.lua](quantizer_bb.lua): a continuous and clocked quantizer demo
 - [samplehold_bb.lua](samplehold_bb.lua): sample and hold basics for scripting tutorial
-- [seqswitch.lua](seqswitch.lua): route an input to 1 of 4 outputs with optional 'hold'
-- [shiftregister.lua](shiftregister.lua) (*): output the last 4 captured voltages & play just friends
+- [seqswitch_bb.lua](seqswitch_bb.lua): route an input to 1 of 4 outputs with optional 'hold'
+- [shiftregister_bb.lua](shiftregister_bb.lua) (*): output the last 4 captured voltages & play just friends
 - [timeline.lua](timeline.lua): timeline sequencer
 
 learn how to upload scripts to blackbird using [***stage one*** of the crow scripting tutorial](https://monome.org/docs/crow/scripting)
