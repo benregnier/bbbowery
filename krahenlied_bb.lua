@@ -21,6 +21,7 @@
     end
     return tempScalar
   end
+  s = sequins(processString(text_string))
   function set()
     s:settable(processString(text_string))
   end
@@ -36,14 +37,14 @@
   end
   function init()
     input[1].mode('clock')
-    bpm = clock.tempo  
+    bpm = clock.tempo
   end
   function notes_event()
     while true do
       clock.sync(s()/s:step(2)())
       output[1].volts = s:step(3)()/12
       output[1].slew = s:step(4)()/300
-      output[2].action = ar(s:step(5)()/20, s:step(6)()/20, j:step(7)(), 'linear')
+      output[2].action = ar(s:step(5)()/20, s:step(6)()/20, 'linear')
       output[2]()
     end
   end
@@ -52,7 +53,7 @@
       clock.sync(s:step(8)()/s:step(9)())
       output[3].volts = s:step(10)()/12
       output[3].slew = s:step(11)()/300
-      output[4].action = ar(s:step(12)()/20, s:step(13)()/20, j:step(14)(), 'linear')
+      output[4].action = ar(s:step(12)()/20, s:step(13)()/20, 'linear')
       output[4]()
     end
   end
